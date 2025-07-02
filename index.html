@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Educorts 💈</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <header class="bg-black text-white p-6 text-center text-2xl font-bold">
+    Educorts 💈
+  </header>
+
+  <section class="max-w-md w-full mx-auto mt-10 bg-white shadow-lg rounded-xl p-6">
+    <h2 class="text-xl font-semibold mb-4 text-center">Agende seu corte de cabelo</h2>
+    <form id="formAgendamento" class="space-y-4">
+      <div>
+        <label for="nome" class="block text-sm font-medium">Nome:</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          required
+          class="w-full border p-2 rounded"
+        />
+      </div>
+      <div>
+        <label for="telefone" class="block text-sm font-medium">Telefone:</label>
+        <input
+          type="tel"
+          id="telefone"
+          name="telefone"
+          required
+          pattern="\d{10,11}"
+          placeholder="Apenas números"
+          class="w-full border p-2 rounded"
+        />
+      </div>
+      <div>
+        <label for="servico" class="block text-sm font-medium">Serviço:</label>
+        <select
+          id="servico"
+          name="servico"
+          required
+          class="w-full border p-2 rounded"
+        >
+          <option value="">Selecione um serviço</option>
+          <option value="Corte">Corte</option>
+          <option value="Barba">Barba</option>
+          <option value="Sobrancelha">Sobrancelha</option>
+          <option value="Corte e Barba">Corte e Barba</option>
+          <option value="Luzes">Luzes</option>
+        </select>
+      </div>
+      <div>
+        <label for="data" class="block text-sm font-medium">Data:</label>
+        <input
+          type="date"
+          id="data"
+          name="data"
+          required
+          class="w-full border p-2 rounded"
+        />
+      </div>
+      <div>
+        <label for="hora" class="block text-sm font-medium">Hora:</label>
+        <select
+          id="hora"
+          name="hora"
+          required
+          class="w-full border p-2 rounded"
+        >
+          <option value="">Selecione um horário</option>
+          <option>09:00</option>
+          <option>10:00</option>
+          <option>11:00</option>
+          <option>14:00</option>
+          <option>15:00</option>
+          <option>16:00</option>
+          <option>17:00</option>
+          <option>18:00</option>
+          <option>19:00</option>
+          <option>20:00</option>
+        </select>
+      </div>
+      <button
+        type="submit"
+        class="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 w-full"
+      >
+        Agendar
+      </button>
+    </form>
+
+    <div
+      id="mensagem"
+      class="mt-4 text-green-600 hidden text-center"
+    >
+      ✅ Agendamento realizado com sucesso!
+    </div>
+  </section>
+
+  <script>
+    document
+      .getElementById("formAgendamento")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        const nome = document.getElementById("nome").value;
+        const telefone = document.getElementById("telefone").value;
+        const servico = document.getElementById("servico").value;
+        const data = document.getElementById("data").value;
+        const hora = document.getElementById("hora").value;
+
+        const mensagem = `Olá, gostaria de agendar um horário!%0A%0A*Nome:* ${nome}%0A*Telefone:* ${telefone}%0A*Serviço:* ${servico}%0A*Data:* ${data}%0A*Hora:* ${hora}`;
+        const numero = "5575991793994"; // seu número com DDD, sem + ou espaços
+        const url = `https://wa.me/${numero}?text=${mensagem}`;
+
+        window.open(url, "_blank");
+        document.getElementById("formAgendamento").reset();
+        document.getElementById("mensagem").classList.remove("hidden");
+      });
+  </script>
+</body>
+</html>
